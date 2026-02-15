@@ -1377,7 +1377,7 @@ export function writeSignal(node: SignalState<any> | Memo<any>, value: any, isCo
       }
       if (!TransitionRunning) node.value = value;
     } else node.value = value;
-    if (node.observers && node.observers) {
+    if (node.observers) {
       runUpdates(() => {
         for (let link = node.observers; link !== null; link = link.nextObserver) {
           const o = link.observer;
@@ -1725,7 +1725,7 @@ function cleanupRoot(node: Owner) {
   }
 
   if (node.cleanups) {
-    for (let i = node.cleanups.length - 1; i >= 0; i--) node.cleanups[i]();
+    for (i = node.cleanups.length - 1; i >= 0; i--) node.cleanups[i]();
     node.cleanups = null;
   }
   if (Transition && Transition.running) (node as Computation<any>).tState = 0;
